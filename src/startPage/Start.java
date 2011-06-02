@@ -32,9 +32,13 @@ public class Start extends PApplet  {
 		wiiManager=new WiiManager();
 	}
 	
-	public void draw() {
+	public void draw() {	
 		if(menuMode){
 			menuSelection.display();
+			if(wiiManager.ropeGestureListener.gestureID == 1){
+				menuMode=false;
+				kiteMode=true;
+			}
 		}
 
 		if(kiteMode){

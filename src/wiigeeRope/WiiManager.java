@@ -8,6 +8,8 @@ import org.wiigee.control.Wiigee;
 public class WiiManager {
 	private WiimoteWiigee wiigee;
 	private Wiimote wiimote;
+	public RopeGestureListener ropeGestureListener; 
+
 	
 	public WiiManager() {
 		wiigee = new WiimoteWiigee();
@@ -25,7 +27,8 @@ public class WiiManager {
 		wiigee.setCloseGestureButton(Wiimote.BUTTON_HOME);
 		wiigee.setRecognitionButton(Wiimote.BUTTON_B);
 		
-		wiigee.addGestureListener(new RopeGestureListener()); 
+		ropeGestureListener=new RopeGestureListener();		
+		wiigee.addGestureListener(ropeGestureListener);		
 	}
 
 }

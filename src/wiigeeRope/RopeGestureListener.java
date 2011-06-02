@@ -4,15 +4,17 @@ import org.wiigee.event.GestureListener;
 
 
 public class RopeGestureListener implements GestureListener {
+	public int gestureID;
 
 	public RopeGestureListener() {
 	}
 
 	@Override
 	public void gestureReceived(GestureEvent event) {
-		System.out.println(event.getId());
+		gestureID=event.getId();
+		System.out.println(gestureID);
 		//event.getSource().saveGesture(event.getId(), "RopeJumping");
-		if (event.getId() == 0) { 
+		if (gestureID == 0) { 
 			System.out.println("horseDriving");
 		}
 		else {
