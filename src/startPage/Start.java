@@ -3,6 +3,7 @@ package startPage;
 import processing.core.*;
 import kiteFlying.Kite;
 import menuSelection.MenuSelection;
+import wiigeeRope.WiiManager;
 
 public class Start extends PApplet  {
 	private static final long serialVersionUID = 1L;
@@ -10,6 +11,8 @@ public class Start extends PApplet  {
 	public MenuSelection menuSelection;
 	public Kite kite1;
 	public PImage bg;
+	
+	public WiiManager wiiManager;
     
 	public boolean menuMode;
 	public boolean kiteMode;
@@ -25,6 +28,8 @@ public class Start extends PApplet  {
 		bg=loadImage("chinaBackground.png");
 		menuMode=true;
 		kiteMode=false;
+		
+		wiiManager=new WiiManager();
 	}
 	
 	public void draw() {
