@@ -14,8 +14,8 @@ public class Start extends PApplet  {
 	
 	public WiiManager wiiManager;
     
-	public boolean menuMode;
-	public boolean kiteMode;
+	public boolean startMode,kiteMode,horseMode,jumpMode;
+	public int startPointX, startPointY;
 	
 	
 	public void setup(){
@@ -23,26 +23,41 @@ public class Start extends PApplet  {
 		background(0);
 		smooth();
 		
+		bg=loadImage("bg.png");
+		startPointX=0;
+		startPointY=0;
+		
 		kite1= new Kite (this);
 		menuSelection = new MenuSelection (this);
-		bg=loadImage("chinaBackground.png");
-		menuMode=true;
-		kiteMode=false;
 		
-		wiiManager=new WiiManager();
+		startMode();
+
+		//wiiManager=new WiiManager();
 	}
 	
-	public void draw() {	
-		if(menuMode){
+	public void draw() {
+		image(bg,startPointX,startPointY);
+		
+		if(startMode){
+			bgMoving(0,0);
 			menuSelection.display();
-			if(wiiManager.ropeGestureListener.gestureID == 1){
-				menuMode=false;
-				kiteMode=true;
-			}
+			
+//			if(wiiManager.ropeGestureListener.gestureID == 1){
+//				kiteMode();
+//				wiiManager.ropeGestureListener.gestureID =0;
+//			} 
+//			else if (wiiManager.ropeGestureListener.gestureID == 2){
+//				horseMode();
+//				wiiManager.ropeGestureListener.gestureID =0;
+//			}
+//			else if(wiiManager.ropeGestureListener.gestureID == 3){
+//				jumpMode();
+//				wiiManager.ropeGestureListener.gestureID =0;
+//			}
 		}
 
 		if(kiteMode){
-			image(bg,0,0);
+			bgMoving(-800,0);
 
 			if(kite1.noWind){
 				kite1.withoutWind();
@@ -55,14 +70,21 @@ public class Start extends PApplet  {
 			}
 			kite1.writeScoreForKite1();	
 		}
+		
+		if(horseMode){
+			bgMoving(20,-768);
+		}
+		if(jumpMode){
+			bgMoving(-1024,-768);
+		}
 	}
 	
 	public void keyPressed() {
 		//SWITCHING MODE
-		if(key== '1'){
-			menuMode=false;
-			kiteMode=true;
-		}
+		if(key=='4') startMode();
+		if(key=='1') kiteMode();
+		if(key=='2') horseMode();
+		if(key=='3') jumpMode();
 		
 		//KITE FLYING
 		if(keyCode==UP){
@@ -79,6 +101,39 @@ public class Start extends PApplet  {
 			kite1.goRightStatus();
 		}	
 	}
+	
+	//MODE SWITCHING FUNCTION
+	public void startMode(){
+		startMode=true;
+		kiteMode=false;
+		horseMode=false;
+		jumpMode=false;
+	}
+	public void kiteMode(){
+		startMode=false;
+		kiteMode=true;
+		horseMode=false;
+		jumpMode=false;
+	}
+	public void horseMode(){
+		startMode=false;
+		kiteMode=false;
+		horseMode=true;
+		jumpMode=false;
+	}
+	public void jumpMode(){
+		startMode=false;
+		kiteMode=false;
+		horseMode=false;
+		jumpMode=true;
+	}
+	public void bgMoving(int xPosition, int yPosition){
+	    if(startPointX>xPosition) startPointX-=8;
+	    if(startPointX<xPosition) startPointX+=8;
+	    if(startPointY>yPosition) startPointY-=8;
+	    if(startPointY<yPosition) startPointY+=8;
+	}
+	
 	
 	public static void main(String args[]) {
 		PApplet.main(new String[] {"--present", "startPage.Start"});

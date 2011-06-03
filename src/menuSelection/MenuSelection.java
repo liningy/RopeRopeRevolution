@@ -1,5 +1,6 @@
 package menuSelection;
 import processing.core.*;
+import startPage.Start;
 
 
 public class MenuSelection {
@@ -9,7 +10,7 @@ public class MenuSelection {
 	
 	public MenuSelection (PApplet p){
 		parent=p;
-		menuSelection=  parent.loadImage ("menuSelection-01.jpg");
+		menuSelection=  parent.loadImage ("menuSelection.png");
 	}
 
 	public void display(){

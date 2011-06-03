@@ -13,12 +13,17 @@ public class RopeGestureListener implements GestureListener {
 	public void gestureReceived(GestureEvent event) {
 		gestureID=event.getId();
 		System.out.println(gestureID);
-		//event.getSource().saveGesture(event.getId(), "RopeJumping");
-		if (gestureID == 0) { 
-			System.out.println("horseDriving");
+		
+		//event.getSource().saveGesture(event.getId(), "jump");
+		
+		if (gestureID==1) { 
+			System.out.println("kite");
 		}
-		else {
-			System.out.println("ropejumping");
+		else if(gestureID==2) {
+			System.out.println("horse");
+		}
+		else if(gestureID==3){
+			System.out.println("jump");
 		}
 	}
 

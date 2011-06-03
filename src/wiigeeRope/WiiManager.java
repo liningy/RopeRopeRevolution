@@ -20,8 +20,11 @@ public class WiiManager {
 			System.out.println(e.getLocalizedMessage());
 		}
 		
-		wiimote.loadGesture("horseDriving");
-		wiimote.loadGesture("Ropejumping");
+		wiimote.loadGesture("init");
+		wiimote.loadGesture("kite");
+		wiimote.loadGesture("horse");
+		wiimote.loadGesture("jump");
+
 		
 		wiigee.setTrainButton(Wiimote.BUTTON_A);
 		wiigee.setCloseGestureButton(Wiimote.BUTTON_HOME);
