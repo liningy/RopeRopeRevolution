@@ -4,14 +4,14 @@ import processing.core.*;
 public class Kite{
 	PApplet parent;
 	//field
-	public PVector kitePosition;
-	public int numFramesOfTautKites = 40;  // The number of frames in the animation
-	public int frameOfTautKites = 0;
-	public PImage[] tautKites = new PImage[numFramesOfTautKites];
+	private PVector kitePosition;
+	private int numFramesOfTautKites = 40;  // The number of frames in the animation
+	private int frameOfTautKites = 0;
+	private PImage[] tautKites = new PImage[numFramesOfTautKites];
 	public int tautUp=0;
 	public int tautRight=0;
-	public double theta;
-	public double speed;
+	private double theta;
+	private double speed;
 	public PImage wind;
 	public PImage wind2;
 	  
@@ -24,7 +24,7 @@ public class Kite{
 	public boolean noWind=true;  
 	public boolean leftWind=false;  
 	public boolean rightWind=false;
-	public boolean flag=false;
+	private boolean flag=false;
 	  
 	public int score=0;
 	public PFont fontForScore;
@@ -39,7 +39,7 @@ public class Kite{
 		    tautKites[i].resize(250,250);
 		}  
 		    
-		kitePosition = new PVector(parent.width/2,parent.height-100);
+		kitePosition = new PVector(parent.width/2,parent.height-200);
 		theta=0;
 		speed=1;
 		fontForScore = parent.createFont("HelveticaNeue-Light-48.vlw", 32);
@@ -48,7 +48,7 @@ public class Kite{
 	}
 	
 	//functions
-	public void display(){
+	private void display(){
 		frameOfTautKites = (frameOfTautKites+1) % numFramesOfTautKites;  // Use % to cycle through frames    
 		parent.pushMatrix(); 
 		parent.translate(kitePosition.x,  kitePosition.y); 
@@ -59,7 +59,7 @@ public class Kite{
 		parent.popMatrix();
 	}
 		  
-	public void display_leftRotate(double spinSpeed){
+	private void display_leftRotate(double spinSpeed){
 		theta -= spinSpeed;
 		parent.pushMatrix(); 
 		parent.translate(kitePosition.x,  kitePosition.y); 
@@ -72,7 +72,7 @@ public class Kite{
 		parent.popMatrix();
 	}
 
-	public void display_rightRotate(double spinSpeed){
+	private void display_rightRotate(double spinSpeed){
 		theta += spinSpeed;
 		parent.pushMatrix(); 
 		parent.translate(kitePosition.x,  kitePosition.y); 
@@ -85,22 +85,22 @@ public class Kite{
 		parent.popMatrix();
 	}
 
-	public void goUp(){
+	private void goUp(){
 		kitePosition.y-=(speed+3);
 		if(kitePosition.y<30) kitePosition.y=30;
 	}
 
-	public void fallDown(){
+	private void fallDown(){
 		kitePosition.y+=(speed+2); 
 		if(kitePosition.y>parent.height-30) kitePosition.y=parent.height-30;
 	}
 
-	public void moveLeft(){
+	private void moveLeft(){
 		kitePosition.x-=(speed+2); 
 		if(kitePosition.x<30) kitePosition.x=30;
 	}
 
-	public void moveRight(){
+	private void moveRight(){
 		kitePosition.x+=(speed+2);
 		if(kitePosition.x>parent.width-30) kitePosition.x=parent.width-30;
 	}

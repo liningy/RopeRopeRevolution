@@ -1,7 +1,9 @@
 package startPage;
 
+import horseDriving.Horse;
 import processing.core.*;
 import kiteFlying.Kite;
+import kiteFlying.KiteTest;
 import menuSelection.MenuSelection;
 import wiigeeRope.WiiManager;
 
@@ -9,12 +11,14 @@ public class Start extends PApplet  {
 	private static final long serialVersionUID = 1L;
 	
 	public MenuSelection menuSelection;
-	public Kite kite1;
+	public Kite kite;
+	public Horse horse;
+	public KiteTest kiteTest;
 	public PImage bg;
 	
 	public WiiManager wiiManager;
     
-	public boolean startMode,kiteMode,horseMode,jumpMode;
+	public boolean startMode,kiteMode,horseMode,jumpMode,sawMode;
 	public int startPointX, startPointY;
 	
 	
@@ -27,12 +31,13 @@ public class Start extends PApplet  {
 		startPointX=0;
 		startPointY=0;
 		
-		kite1= new Kite (this);
+		
 		menuSelection = new MenuSelection (this);
 		
 		startMode();
 
-		//wiiManager=new WiiManager();
+		//WIIGEE
+		wiiManager=new WiiManager();
 	}
 	
 	public void draw() {
@@ -42,64 +47,98 @@ public class Start extends PApplet  {
 			bgMoving(0,0);
 			menuSelection.display();
 			
-//			if(wiiManager.ropeGestureListener.gestureID == 1){
-//				kiteMode();
-//				wiiManager.ropeGestureListener.gestureID =0;
-//			} 
-//			else if (wiiManager.ropeGestureListener.gestureID == 2){
-//				horseMode();
-//				wiiManager.ropeGestureListener.gestureID =0;
-//			}
-//			else if(wiiManager.ropeGestureListener.gestureID == 3){
-//				jumpMode();
-//				wiiManager.ropeGestureListener.gestureID =0;
-//			}
+			//WIIGII_Gesture Menu Selection
+			if(wiiManager.ropeGestureListener.gestureID == 1){
+				kiteMode();
+				kite= new Kite (this);
+				wiiManager.ropeGestureListener.gestureID =0;
+			} 
+			else if (wiiManager.ropeGestureListener.gestureID == 2){
+				horseMode();
+				horse=new Horse(this);
+				wiiManager.ropeGestureListener.gestureID =0;
+			}
+			else if(wiiManager.ropeGestureListener.gestureID == 3){
+				jumpMode();
+				wiiManager.ropeGestureListener.gestureID =0;
+			}
+			else if(wiiManager.ropeGestureListener.gestureID == 4){
+				sawMode();
+				wiiManager.ropeGestureListener.gestureID =0;
+			}
 		}
 
 		if(kiteMode){
 			bgMoving(-800,0);
 
-			if(kite1.noWind){
-				kite1.withoutWind();
+			if(kite.noWind){
+				kite.withoutWind();
 			}
-			if(kite1.rightWind){
-				kite1.withRightWind();
+			if(kite.rightWind){
+				kite.withRightWind();
 			}
-			if(kite1.leftWind){
-				kite1.withLeftWind();
+			if(kite.leftWind){
+				kite.withLeftWind();
 			}
-			kite1.writeScoreForKite1();	
+			kite.writeScoreForKite1();	
 		}
 		
 		if(horseMode){
-			bgMoving(20,-768);
+			bgMoving(0,-768);
+			horse.horseDriving();
 		}
 		if(jumpMode){
 			bgMoving(-1024,-768);
+		}
+		if(sawMode){
+			bgMoving(-2040,-768);
 		}
 	}
 	
 	public void keyPressed() {
 		//SWITCHING MODE
-		if(key=='4') startMode();
-		if(key=='1') kiteMode();
-		if(key=='2') horseMode();
+		if(key=='0') startMode();
+		if(key=='1') {
+			kiteMode();
+			kite= new Kite (this);
+		}
+		if(key=='2') {
+			horseMode();
+			//horse= new Horse (this);
+
+		}
 		if(key=='3') jumpMode();
+		if(key=='4') sawMode();
 		
 		//KITE FLYING
-		if(keyCode==UP){
-			kite1.goUpStatus();
-		}
+		if(kiteMode){
+			if(keyCode==UP){
+				kite.goUpStatus();
+			}
 
-		if(keyCode==DOWN){
-			kite1.goDownStatus();
+			if(keyCode==DOWN){
+				kite.goDownStatus();
+			}
+			if(keyCode==LEFT){
+				kite.goLeftStatus();
+			}
+			if(keyCode==RIGHT){
+				kite.goRightStatus();
+			}	
 		}
-		if(keyCode==LEFT){
-			kite1.goLeftStatus();
+		
+		//HORSE DRIVING
+		if(horseMode){
+			if(keyCode==UP){
+				horse.horse_goUpStatus();
+			}
+			if(keyCode==LEFT){
+				horse.horse_goLeftStatus();
+			}
+			if(keyCode==RIGHT){
+				horse.horse_goRightStatus();
+			}	
 		}
-		if(keyCode==RIGHT){
-			kite1.goRightStatus();
-		}	
 	}
 	
 	//MODE SWITCHING FUNCTION
@@ -108,24 +147,44 @@ public class Start extends PApplet  {
 		kiteMode=false;
 		horseMode=false;
 		jumpMode=false;
+		sawMode=false;
+		//wiiManager.gameMode=false;
 	}
 	public void kiteMode(){
 		startMode=false;
 		kiteMode=true;
 		horseMode=false;
 		jumpMode=false;
+		sawMode=false;
+		//wiiManager.gameMode=true;
+
 	}
 	public void horseMode(){
 		startMode=false;
 		kiteMode=false;
 		horseMode=true;
 		jumpMode=false;
+		sawMode=false;
+		//wiiManager.gameMode=true;
+
 	}
 	public void jumpMode(){
 		startMode=false;
 		kiteMode=false;
 		horseMode=false;
 		jumpMode=true;
+		sawMode=false;
+		//wiiManager.gameMode=true;
+
+	}
+	public void sawMode(){
+		startMode=false;
+		kiteMode=false;
+		horseMode=false;
+		jumpMode=false;
+		sawMode=true;
+		//wiiManager.gameMode=true;
+
 	}
 	public void bgMoving(int xPosition, int yPosition){
 	    if(startPointX>xPosition) startPointX-=8;
