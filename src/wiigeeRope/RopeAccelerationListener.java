@@ -90,6 +90,8 @@ public class RopeAccelerationListener implements AccelerationListener {
 		inMotion = false;
 		goingUp = false;
 		goingDown = false;
+		horseMove=0;
+    	System.out.println(horseMove);
 		
 	}
 }

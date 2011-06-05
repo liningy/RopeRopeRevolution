@@ -7,9 +7,11 @@ public class Horse {
 	PApplet parent;	
 	//FIELD
 	private PVector horsePosition;
-	private int numFramesOfHorse = 15;  // The number of frames in the animation
+	private int numFramesOfHorse = 3;  // The number of frames in the animation
 	private int frameOfHorses = 0;
 	private PImage[] horses = new PImage[numFramesOfHorse];
+	private int loop=0;
+	private int numofLoop=7;
 	private double speed;
 	public boolean horse_goUp = false;
 	public boolean horse_pullLeft=false;
@@ -43,20 +45,22 @@ public class Horse {
 		
 	}
 	
-	//functions
+	//FUNCTION
 	public void display(){
 		parent.pushMatrix(); 
 		parent.translate(horsePosition.x,  horsePosition.y); 
-		frameOfHorses = (frameOfHorses+1) % numFramesOfHorse;  // Use % to cycle through frames    
+		loop=(loop+1)%numofLoop;
+		if(loop==(numofLoop-1)) frameOfHorses = (frameOfHorses+1) % numFramesOfHorse;  // Use % to cycle through frames    
 		parent.imageMode(parent.CENTER);
 		parent.scale((horsePosition.y+200)/500);
 		parent.image(horses[frameOfHorses],  0,  0);
 		parent.imageMode(parent.CORNER);
+		//System.out.println(horses[frameOfHorses] + " frameOfhorse: " + frameOfHorses + "loop=" + loop);
 		parent.popMatrix();
 	}
 	public void horse_goUp(){
-		horsePosition.y-=(speed+3);
-		if(horsePosition.y<30) horsePosition.y=10;
+		horsePosition.y-=(speed+0.2);
+		if(horsePosition.y<30) horsePosition.y=2;
 	}
 
 	public void horse_moveLeft(){
