@@ -1,10 +1,11 @@
 package kiteFlying;
 import processing.core.*;
+import ddf.minim.*;
 
 public class Kite{
 	PApplet parent;
 	//field
-	private PVector kitePosition;
+	public PVector kitePosition;
 	private int numFramesOfTautKites = 40;  // The number of frames in the animation
 	private int frameOfTautKites = 0;
 	private PImage[] tautKites = new PImage[numFramesOfTautKites];
@@ -28,7 +29,7 @@ public class Kite{
 	  
 	public int score=0;
 	public PFont fontForScore;
-	
+		
 	//arguments
 	public Kite(PApplet p){
 		parent=p;
@@ -274,20 +275,12 @@ public class Kite{
 		rightWind=false;
 	}
 
-	public void writeScoreForKite1(){
+	public void writeScoreForKite(){
 		parent.textFont(fontForScore, 48);
 		parent.fill(255);
 		parent.textAlign(parent.LEFT, parent.TOP);
 		//text(kite1Score, 926,94);
 		//image(scoreImg,761,101);
-	}
-
-	public void writeScoreForKite2(){
-		parent.textFont(fontForScore, 48);
-		parent.fill(255);
-		parent.textAlign(parent.LEFT, parent.TOP);
-		//text(kite2Score, 926,147);
-		//image(scoreImg,761,154);
 	}
 
 }
