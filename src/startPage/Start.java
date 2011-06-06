@@ -42,7 +42,7 @@ public class Start extends PApplet  {
 
 
 		//WIIGEE
-		//wiiManager=new WiiManager();
+		wiiManager=new WiiManager();
 	}
 	
 	public void draw() {
@@ -53,25 +53,25 @@ public class Start extends PApplet  {
 			menuSelection.display();
 			
 			//WIIGII_Gesture Menu Selection
-//			if(wiiManager.ropeGestureListener.gestureID == 1){
-//				kiteMode();
-//				kite= new Kite (this);
-//				wiiManager.ropeGestureListener.gestureID =0;
-//			} 
-//			else if (wiiManager.ropeGestureListener.gestureID == 2){
-//				horseMode();
-//				horse=new Horse(this);
-//				wiiManager.ropeGestureListener.gestureID =0;
-//			}
-//			else if(wiiManager.ropeGestureListener.gestureID == 3){
-//				jumpMode();
-//			    jump=new Jump(this);
-//				wiiManager.ropeGestureListener.gestureID =0;
-//			}
-//			else if(wiiManager.ropeGestureListener.gestureID == 4){
-//				sawMode();
-//				wiiManager.ropeGestureListener.gestureID =0;
-//			}
+			if(wiiManager.ropeGestureListener.gestureID == 1){
+				kiteMode();
+				kite= new Kite (this);
+				wiiManager.ropeGestureListener.gestureID =0;
+			} 
+			else if (wiiManager.ropeGestureListener.gestureID == 2){
+				horseMode();
+				horse=new Horse(this);
+				wiiManager.ropeGestureListener.gestureID =0;
+			}
+			else if(wiiManager.ropeGestureListener.gestureID == 3){
+				jumpMode();
+			    jump=new Jump(this);
+				wiiManager.ropeGestureListener.gestureID =0;
+			}
+			else if(wiiManager.ropeGestureListener.gestureID == 4){
+				sawMode();
+				wiiManager.ropeGestureListener.gestureID =0;
+			}
 		}
 
 		if(kiteMode){
@@ -93,24 +93,28 @@ public class Start extends PApplet  {
 			horse.horseDriving();	
 			
 			//WIIGEE_GESTURE RECOGNITION
-//			if(wiiManager.ropeAccelerationListener.horseMove==1){
-//				horseForward=true;
-//				horseStart=System.currentTimeMillis();
-//			}
-//			else horseForward=false;
-//			
-//			if(horseForward){
-//				horse.horse_goUpStatus();
-//				horseForward=false;
-//			}
-//			else{
-//				horse.horse_stayStill();
-//			}
+			if(wiiManager.ropeAccelerationListener.horseMove==1){
+				horseForward=true;
+				horseStart=System.currentTimeMillis();
+			}
+			else horseForward=false;
+			
+			if(horseForward){
+				horse.horse_goUpStatus();
+				horseForward=false;
+			}
+			else{
+				horse.horse_stayStill();
+			}
 		}
 		
 		if(jumpMode){
 			bgMoving(-1024,-768);
 			jump.runALoop();
+			//WIIGEE_GESTURE RECOGNITION
+			if(wiiManager.ropeAccelerationListener.upAndDown==1){
+				jump.frameOfJump=0;
+			}
 		}
 		
 		if(sawMode){

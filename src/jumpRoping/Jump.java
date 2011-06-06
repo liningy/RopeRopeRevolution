@@ -47,9 +47,6 @@ public class Jump {
 		parent.pushMatrix(); 
 		parent.translate(jumpPosition.x,  jumpPosition.y);
 		parent.imageMode(parent.CENTER);
-		
-		//for(int i=0; i<numFramesOfJump-2; i++){
-
 
 		if(frameOfJump<8) {
 			if(frameOfJump == 0)
