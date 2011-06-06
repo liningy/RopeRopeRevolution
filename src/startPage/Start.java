@@ -89,7 +89,6 @@ public class Start extends PApplet  {
 		totalScore=0;
 		fontForScore = createFont("HelveticaNeue-Light-48.vlw", 32);
 
-
 		//WIIGEE
 		//wiiManager=new WiiManager();
 
@@ -151,6 +150,7 @@ public class Start extends PApplet  {
 			
 			bgMoving(0,-768);
 			horse.horseDriving();	
+			hitHorse();
 			
 			//WIIGEE_GESTURE RECOGNITION
 //			if(wiiManager.ropeAccelerationListener.horseMove==1){
@@ -171,6 +171,7 @@ public class Start extends PApplet  {
 		if(jumpMode){
 			song3.play();
 			isPlaying_jump=true;
+			hitJump();
 			
 			bgMoving(-1024,-768);
 			jump.runALoop();
@@ -178,7 +179,7 @@ public class Start extends PApplet  {
 //			if(wiiManager.ropeAccelerationListener.upAndDown==1){
 //				jump.frameOfJump=0;
 //			    song3_2.play();
-//			}
+//			}			
 		}
 		
 		if(sawMode){
@@ -344,6 +345,29 @@ public class Start extends PApplet  {
 			points.flag=false;
 			points.randomeSelectionFlag=true;
 		}
+	}
+	
+	public void hitJump(){
+		if (jump.frameOfJump==0) {
+			int gainedScore=10;
+			totalScore+=gainedScore;
+		}
+	}
+	
+	public void hitHorse(){
+		if((horse.horsePosition.y<horse.horseLevel_1) && (!horse.horseLevel_1Passed)){
+			totalScore+=10;
+			horse.horseLevel_1Passed=true;
+		}
+		else if((horse.horsePosition.y<horse.horseLevel_2) && (!horse.horseLevel_2Passed)){
+			totalScore+=50;
+			horse.horseLevel_2Passed=true;
+		}
+		else if((horse.horsePosition.y<horse.horseLevel_3) && (!horse.horseLevel_3Passed)){
+			totalScore+=50;
+			horse.horseLevel_3Passed=true;
+		}
+
 	}
 	
 	public void writeScores(){

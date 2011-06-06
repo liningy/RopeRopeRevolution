@@ -6,7 +6,7 @@ import startPage.Start;
 public class Horse {
 	PApplet parent;	
 	//FIELD
-	private PVector horsePosition;
+	public PVector horsePosition;
 	private int numFramesOfHorse = 3;  // The number of frames in the animation
 	private int frameOfHorses = 0;
 	private PImage[] horses = new PImage[numFramesOfHorse];
@@ -22,6 +22,8 @@ public class Horse {
 	public boolean collisionHappen=false;
 	public boolean isLeftCollision=true;
     public float collisionX;
+	public int horseLevel_1,horseLevel_2,horseLevel_3;
+	public boolean horseLevel_1Passed,horseLevel_2Passed,horseLevel_3Passed;
 	
 	
 	public Horse (PApplet p){
@@ -43,6 +45,12 @@ public class Horse {
 		paths[4]=new Path(877,380, 508,163);
 		paths[5]=new Path(508,163, 603,0);
 		
+		horseLevel_1=414;
+		horseLevel_2=199;
+		horseLevel_3=56;
+		horseLevel_1Passed=false;
+		horseLevel_2Passed=false;
+		horseLevel_3Passed=false;		
 	}
 	
 	//FUNCTION
